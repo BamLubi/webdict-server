@@ -18,7 +18,8 @@ func RunHttp() {
 		appInfoGroup.POST("/literature/insert", controller.NewLiteratureController().Insert)
 		appInfoGroup.POST("/literature/update", controller.NewLiteratureController().Update)
 		appInfoGroup.GET("/literature/getAll", controller.NewLiteratureController().FindAll)
-		appInfoGroup.GET("/literature/get/:key", controller.NewLiteratureController().FuzzyFind)
+		appInfoGroup.GET("/literature/search/:key", controller.NewLiteratureController().FuzzyFind)
+		appInfoGroup.GET("/literature/get/:id", controller.NewLiteratureController().FindById)
 	}
-	r.Run(config.HOST + config.PORT)
+	r.Run(config.HOST + ":" + config.PORT)
 }

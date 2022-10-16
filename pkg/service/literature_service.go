@@ -28,7 +28,7 @@ func (service LiteratureService) Insert(ctx context.Context, literature entity.L
 
 func (service LiteratureService) FindAll(ctx context.Context) []entity.Literature {
 	var literatures []entity.Literature
-	service.db.Find(&literatures)
+	service.db.Order("rate DESC").Limit(50).Find(&literatures)
 	return literatures
 }
 
@@ -64,4 +64,10 @@ func (service LiteratureService) FuzzyFind(ctx context.Context, key string) []en
 	}
 	service.db.Model(&entity.Literature{}).Where("available = '1' AND "+queryCol+" like ?", "%"+key+"%").Order("rate DESC").Limit(50).Find(&literatures)
 	return literatures
+}
+
+func (service LiteratureService) FindById(ctx context.Context, id string) entity.Literature {
+	var literature entity.Literature
+	service.db.Model(&entity.Literature{}).Where("id = ?", id).First(&literature)
+	return literature
 }

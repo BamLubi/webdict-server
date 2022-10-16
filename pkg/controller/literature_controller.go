@@ -21,6 +21,12 @@ func (controller LiteratureController) FindAll(c *gin.Context) {
 	c.JSON(200, map[string]interface{}{"code": 0, "msg": "", "count": len(literatures), "data": literatures})
 }
 
+func (controller LiteratureController) FindById(c *gin.Context) {
+	id := c.Param("id")
+	literature := controller.service.FindById(c, id)
+	c.JSON(200, map[string]interface{}{"code": 0, "msg": "", "count": 1, "data": literature})
+}
+
 func (controller LiteratureController) FuzzyFind(c *gin.Context) {
 	key := c.Param("key")
 	literatures := controller.service.FuzzyFind(c, key)
