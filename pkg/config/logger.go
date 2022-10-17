@@ -85,5 +85,4 @@ func InitLogger(logpath string, loglevel string) {
 	//filed := zap.Fields(zap.String("application", "webdict"))
 	// 构造日志
 	Logger = zap.New(core, caller, development)
-	Logger.Info("Logger init success")
 }

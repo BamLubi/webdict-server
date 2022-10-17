@@ -6,13 +6,18 @@ import (
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"os"
 )
 
 var DB *gorm.DB
 
 func init() {
 	var err error
-	viper.SetConfigName("app")
+	if len(os.Args) > 1 && os.Args[1] == "-DEV" {
+		viper.SetConfigName("dev")
+	} else {
+		viper.SetConfigName("app")
+	}
 	viper.SetConfigType("properties")
 	viper.AddConfigPath("./")
 	err = viper.ReadInConfig()
@@ -37,4 +42,5 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Mysql Connect Success")
 }
