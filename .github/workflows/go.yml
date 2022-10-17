@@ -29,9 +29,9 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_CVM_PK }}
-          ARGS: -rltgoDzvO
-          SOURCE: ./output/
-          REMOTE_HOST: 116.62.161.185
-          REMOTE_USER: root
-          TARGET: /root/test_webdict_server/
-          EXCLUDE: "/dist/, /node_modules/" 
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./output/"
+          REMOTE_HOST: "116.62.161.185"
+          REMOTE_USER: "root"
+          TARGET: "/root/test_webdict_server/"
+          EXCLUDE: "/dist/, /node_modules/"
