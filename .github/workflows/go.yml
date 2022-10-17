@@ -20,4 +20,7 @@ jobs:
         go-version: 1.19
 
     - name: Build
-      run: go build -o ./output/webdict_server ./src/main/main.go
+      run: |
+        go mod download
+        go build -o ./output/webdict_server ./src/main/main.go
+      
