@@ -10,7 +10,6 @@ func RunHttp() {
 	r := gin.Default()
 	// 增加tls支持
 	r.Use(TlsHandler())
-	r.RunTLS(":8001", "./ssl/ssl.pem", "./ssl/ssl.key")
 	//增加拦截器
 	r.Use(HttpInterceptor())
 	//解决跨域
@@ -24,5 +23,6 @@ func RunHttp() {
 		appInfoGroup.GET("/literature/search/:key", controller.NewLiteratureController().FuzzyFind)
 		appInfoGroup.GET("/literature/get/:id", controller.NewLiteratureController().FindById)
 	}
+	r.RunTLS(":8001", "./ssl/ssl.pem", "./ssl/ssl.key")
 	r.Run(config.HOST + ":" + config.PORT)
 }
