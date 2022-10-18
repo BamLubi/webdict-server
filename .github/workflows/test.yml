@@ -38,4 +38,4 @@ jobs:
 
       - name: Test
         run: |
-          ./output/webdict_server
+          ./output/webdict_server -PROD_TEST
