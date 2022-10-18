@@ -30,7 +30,8 @@ jobs:
 
       - name: Init Mysql
         run: |
-          docker exec -i webdict bash ./workflows_test.sh
+          cp ./workflows_test.sh /opt
+          docker exec -i webdict bash /opt/workflows_test.sh
 
       - name: Build
         run: |
