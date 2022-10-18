@@ -30,11 +30,7 @@ jobs:
 
       - name: Init Mysql
         run: |
-          docker exec -i webdict /bin/bash
-          mysql -uroot -pustc123123
-          CREATE DATABASE webdict DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-          exit
-          exit
+          docker exec -i webdict /bin/bash ./workflows_test.sh
 
       - name: Build
         run: |
