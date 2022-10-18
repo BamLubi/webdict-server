@@ -24,6 +24,7 @@ jobs:
         run: |
           go mod download
           go build -o ./output/webdict_server ./src/main/main.go
+          cp ./run.sh ./output
 
       - name: Deploy
         uses: SamKirkland/FTP-Deploy-Action@2.0.0
@@ -32,6 +33,6 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           LOCAL_DIR: "./output/"
-          REMOTE_DIR: "/root/test_webdict_server/"
+          REMOTE_DIR: "/www/wwwroot/webdict_server/"
           METHOD: sftp
           PORT: ${{ secrets.FTP_PORT }}
