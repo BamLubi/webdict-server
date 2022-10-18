@@ -27,15 +27,13 @@ jobs:
         run: |
           docker pull mysql:5.7
           docker pull redis
-          docker run -p 3306:3306 --name webdict -v /opt:/opt -e MYSQL_ROOT_PASSWORD=ustc123123 -d mysql:5.7
           docker run --name webdict-redis -p 6379:6379 -d redis
 
       - name: Init Mysql
         run: |
-          docker inspect webdict
           cp ./workflows_test.sh /opt
-          sudo ufw disable
-          docker exec -i webdict /bin/bash /opt/workflows_test.sh
+          docker run -p 3306:3306 --name webdict -v /opt:/opt -e MYSQL_ROOT_PASSWORD=ustc123123 mysql:5.7 /bin/bash -c "bash /opt/workflows_test.sh"
+#          docker exec -i webdict /bin/bash /opt/workflows_test.sh
 
       - name: Build
         run: |
