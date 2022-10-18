@@ -27,13 +27,7 @@ jobs:
         run: |
           docker pull mysql:5.7
           docker pull redis
-          docker run --name webdict-redis -p 6379:6379 -d redis
-
-      - name: Init Mysql
-        run: |
-          cp ./workflows_test.sh /opt
-          docker run -p 3306:3306 --name webdict -v /opt:/opt -e MYSQL_ROOT_PASSWORD=ustc123123 mysql:5.7 /bin/bash -c "mysql -uroot -pustc123123 -e "CREATE DATABASE webdict DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
-#          docker exec -i webdict /bin/bash /opt/workflows_test.sh
+          docker-compose up -d
 
       - name: Build
         run: |
