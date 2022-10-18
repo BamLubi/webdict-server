@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/spf13/viper"
 	"os"
 	"webdict-server/pkg/config"
@@ -28,6 +29,7 @@ func main() {
 	// 初始化logger
 	config.InitLogger(path, level)
 	config.Logger.Info("Server Run Success on Mode(" + mode + ")")
+	fmt.Println("Server Run Success on Mode(" + mode + ")")
 
 	// 如果是线上测试版，则直接退出，不需要运行服务器
 	if mode == "PRODUCTION TEST" {
