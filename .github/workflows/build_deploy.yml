@@ -32,6 +32,6 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           LOCAL_DIR: "./output/"
-          REMOTE_DIR: "/www/wwwroot/webdict_server/"
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
           METHOD: sftp
           PORT: ${{ secrets.FTP_PORT }}
