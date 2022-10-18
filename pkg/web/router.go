@@ -24,5 +24,5 @@ func RunHttp() {
 		appInfoGroup.GET("/literature/get/:id", controller.NewLiteratureController().FindById)
 	}
 	r.RunTLS(":8001", "./ssl/ssl.pem", "./ssl/ssl.key")
-	r.Run(config.HOST + ":" + config.PORT)
+	//r.Run(config.HOST + ":" + config.PORT)
 }
