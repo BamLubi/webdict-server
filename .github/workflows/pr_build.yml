@@ -3,6 +3,7 @@ name: Build & Test
 on:
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
 
@@ -17,12 +18,22 @@ jobs:
         with:
           go-version: 1.19
 
+      - name: Setup Docker
+        uses: docker-practice/actions-setup-docker@1.0.11
+
+      - name: Init Docker
+        run: |
+          docker pull mysql:5.7
+          docker pull redis
+          docker run -p 3306:3306 --name webdict -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
+          docker run --name webdict-redis -p 6379:6379 -d redis
+
       - name: Build
         run: |
           go mod download
           go build -o ./output/webdict_server ./src/main/main.go
           cp ./run.sh ./output
-          cp ./app.properties ./output
+          cp ./dev.properties ./output
 
       - name: Test
         run: |
