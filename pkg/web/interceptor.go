@@ -1,6 +1,7 @@
 package web
 
 import (
+	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
 	"strings"
@@ -48,6 +49,7 @@ func isAllowedHost(ip string) bool {
 // HttpInterceptor 自定义拦截器
 func HttpInterceptor() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		fmt.Println("获取请求", c.Request.RequestURI)
 		// 请求前
 		addr := remoteAddr(c)
 		// ip过滤
