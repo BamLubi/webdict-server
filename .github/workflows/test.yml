@@ -3,6 +3,8 @@ name: Test
 on:
   pull_request:
     branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -30,6 +32,7 @@ jobs:
 
       - name: Init Mysql
         run: |
+          docker ps
           cp ./workflows_test.sh /opt
           docker exec -i webdict /bin/bash /opt/workflows_test.sh
 
