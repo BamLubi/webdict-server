@@ -32,7 +32,7 @@ jobs:
 
       - name: Init Mysql
         run: |
-          docker ps
+          docker inspect webdict
           cp ./workflows_test.sh /opt
           sudo ufw disable
           docker exec -i webdict /bin/bash /opt/workflows_test.sh
