@@ -23,6 +23,6 @@ func RunHttp() {
 		appInfoGroup.GET("/literature/search/:key", controller.NewLiteratureController().FuzzyFind)
 		appInfoGroup.GET("/literature/get/:id", controller.NewLiteratureController().FindById)
 	}
-	r.RunTLS(":8001", "./ssl/ssl.pem", "./ssl/ssl.key")
+	r.RunTLS(":8001", "/ssl/go.rtclab.top/ssl.pem", "/ssl/go.rtclab.top/ssl.key")
 	//r.Run(config.HOST + ":" + config.PORT)
 }
