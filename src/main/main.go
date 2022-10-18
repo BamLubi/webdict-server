@@ -26,8 +26,6 @@ func main() {
 	config.InitLogger(path, level)
 	config.Logger.Info("Server Run Success on Mode(" + mode + ")")
 
-	// 测试是否可以触发
-
 	// 启动服务器
 	web.RunHttp()
 }
