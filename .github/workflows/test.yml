@@ -34,7 +34,7 @@ jobs:
         run: |
           docker ps
           cp ./workflows_test.sh /opt
-          ufw disable
+          sudo ufw disable
           docker exec -i webdict /bin/bash /opt/workflows_test.sh
 
       - name: Build
