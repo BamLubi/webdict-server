@@ -26,12 +26,12 @@ jobs:
           go build -o ./output/webdict_server ./src/main/main.go
 
       - name: Deploy
-        uses: easingthemes/ssh-deploy@main
+        uses: SamKirkland/FTP-Deploy-Action@2.0.0
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_CVM_PK }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "./output/"
-          REMOTE_HOST: "116.62.161.185"
-          REMOTE_USER: "root"
-          TARGET: "/root/test_webdict_server/"
-          EXCLUDE: "/dist/, /node_modules/"
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          LOCAL_DIR: "./output/"
+          REMOTE_DIR: "/root/test_webdict_server/"
+          METHOD: sftp
+          PORT: ${{ secrets.FTP_PORT }}
