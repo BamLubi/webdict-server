@@ -1,4 +1,4 @@
-name: Build & Test
+name: Test
 
 on:
   pull_request:
@@ -27,6 +27,11 @@ jobs:
           docker pull redis
           docker run -p 3306:3306 --name webdict -e MYSQL_ROOT_PASSWORD=ustc123123 -d mysql:5.7
           docker run --name webdict-redis -p 6379:6379 -d redis
+
+      - name: Init Mysql
+        run: |
+          docker exec -it webdict /bin/bash
+          CREATE DATABASE webdict DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
       - name: Build
         run: |
