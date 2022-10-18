@@ -25,6 +25,7 @@ jobs:
           go mod download
           go build -o ./output/webdict_server ./src/main/main.go
           cp ./run.sh ./output
+          cp ./app.properties ./output
 
       - name: Deploy
         uses: SamKirkland/FTP-Deploy-Action@2.0.0
