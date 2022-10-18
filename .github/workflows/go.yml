@@ -25,13 +25,13 @@ jobs:
           go mod download
           go build -o ./output/webdict_server ./src/main/main.go
 
-      - name: Deploy try sftp
-        uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@main
         env:
-          FTP_SERVER: "116.62.161.185"
-          FTP_USERNAME: "root"
-          FTP_PASSWORD: "iacmy@mail.ustc.edu.cn"
-          LOCAL_DIR: "./output/"
-          REMOTE_DIR: "/root/test_webdict_server/"
-          METHOD: sftp # 指定服务为sftp
-          PORT: "22"
+          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_CVM_PK }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./output/"
+          REMOTE_HOST: "116.62.161.185"
+          REMOTE_USER: "root"
+          TARGET: "/root/test_webdict_server/"
+          EXCLUDE: "/dist/, /node_modules/"
