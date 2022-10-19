@@ -35,13 +35,3 @@ jobs:
           REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
           METHOD: sftp
           PORT: ${{ secrets.FTP_PORT }}
-
-      - name: Run The Server
-        uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY}}
-          pass: ${{ secrets.FTP_PASSWORD}}
-          last_ssh: |
-            nohup bash /www/wwwroot/webdict_server/run.sh > /www/wwwroot/webdict_server/nohup.log 2>&1 &
