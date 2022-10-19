@@ -32,10 +32,9 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY}}
           pass: ${{ secrets.FTP_PASSWORD}}
+          first_ssh: |
+            kill -9 `ps -ef | grep webdict_server | grep -v "grep" | awk '{print $2}'`
           scp: |
             "./output/" => ${{ secrets.REMOTE_DIR }}
           last_ssh: |
             nohup bash ${{ secrets.REMOTE_DIR }}/run.sh > ${{ secrets.REMOTE_DIR }}/nohup.log 2>&1 &
-            lsof -i:8000
-            ps -ef | grep webdict_server | grep -v "grep"
-            
