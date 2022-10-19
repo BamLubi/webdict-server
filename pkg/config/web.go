@@ -5,9 +5,6 @@ import (
 	"net/http"
 )
 
-var PORT string
-var HOST string
-
 func CorsConfig() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.Request.Header.Get("Origin")

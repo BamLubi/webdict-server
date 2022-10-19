@@ -1,27 +1,18 @@
 package config
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
-	"github.com/spf13/viper"
-	"os"
 )
 
 var RD redis.Conn
 
-func init() {
+func InitRedis() {
 	var err error
-	if len(os.Args) > 1 && os.Args[1] == "-DEV" {
-		viper.SetConfigName("dev")
-	} else {
-		viper.SetConfigName("app")
-	}
-	viper.SetConfigType("properties")
-	viper.AddConfigPath("./")
-	url := viper.GetString("redis.url")
-	RD, err = redis.Dial("tcp", url)
+	Logger.Info("Redis Connecting on " + RedisUrl)
+	RD, err = redis.Dial("tcp", RedisUrl)
 	if err != nil {
+		Logger.Error("Redis Connect Fail" + err.Error())
 		panic(err)
 	}
-	fmt.Println("Redis Connect Success")
+	Logger.Info("Redis Connect Success.")
 }
