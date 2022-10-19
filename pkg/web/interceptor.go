@@ -1,7 +1,6 @@
 package web
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
 	"strings"
@@ -49,19 +48,18 @@ func isAllowedHost(ip string) bool {
 // HttpInterceptor 自定义拦截器
 func HttpInterceptor() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		fmt.Println("获取请求", c.Request.RequestURI)
 		// 请求前
 		addr := remoteAddr(c)
 		// ip过滤
 		if !isAllowedHost(addr[0]) {
-			config.Logger.Warn("Request Refuse:" + addr[0] + ":" + addr[1])
+			config.Logger.Warn("Request Refuse: " + addr[0] + ":" + addr[1] + "; " + c.Request.Method + "; " + c.Request.RequestURI)
 			c.AbortWithStatusJSON(500, gin.H{
 				"msg": "非法IP访问",
 			})
 			return
 		}
 		//通过请求
-		config.Logger.Info("Request Allow:" + addr[0] + ":" + addr[1] + ";" + c.Request.Method + ";" + c.Request.RequestURI)
+		config.Logger.Info("Request Allow: " + addr[0] + ":" + addr[1] + "; " + c.Request.Method + "; " + c.Request.RequestURI)
 		c.Next()
 	}
 }
