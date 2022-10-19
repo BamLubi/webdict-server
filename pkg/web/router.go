@@ -8,7 +8,7 @@ import (
 
 func RunHttp() {
 	r := gin.Default()
-	// 增加tls支持
+	// BUG: 增加tls支持, 支持http重定向, 目前有问题
 	//r.Use(TlsHandler())
 	//增加拦截器
 	r.Use(HttpInterceptor())
