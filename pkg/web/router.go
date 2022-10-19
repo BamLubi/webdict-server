@@ -9,7 +9,7 @@ import (
 func RunHttp() {
 	r := gin.Default()
 	// 增加tls支持
-	r.Use(TlsHandler())
+	//r.Use(TlsHandler())
 	//增加拦截器
 	r.Use(HttpInterceptor())
 	//解决跨域
@@ -23,6 +23,6 @@ func RunHttp() {
 		appInfoGroup.GET("/literature/search/:key", controller.NewLiteratureController().FuzzyFind)
 		appInfoGroup.GET("/literature/get/:id", controller.NewLiteratureController().FindById)
 	}
-	r.RunTLS(":8001", "/ssl/go.rtclab.top/ssl.pem", "/ssl/go.rtclab.top/ssl.key")
+	r.RunTLS(":8000", "/ssl/go.rtclab.top/ssl.pem", "/ssl/go.rtclab.top/ssl.key")
 	//r.Run(config.HOST + ":" + config.PORT)
 }
