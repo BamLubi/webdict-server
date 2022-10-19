@@ -38,3 +38,4 @@ jobs:
             nohup bash ${{ secrets.REMOTE_DIR }}/run.sh > ${{ secrets.REMOTE_DIR }}/nohup.log 2>&1 &
             lsof -i:8000
             ps -ef | grep webdict_server | grep -v "grep"
+            
