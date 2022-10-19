@@ -32,9 +32,8 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY}}
           pass: ${{ secrets.FTP_PASSWORD}}
-          first_ssh: |
-            bash ${{ secrets.REMOTE_DIR }}stop.sh
           scp: |
             "./output/" => ${{ secrets.REMOTE_DIR }}
           last_ssh: |
-            nohup bash ${{ secrets.REMOTE_DIR }}run.sh > ${{ secrets.REMOTE_DIR }}nohup.log 2>&1 &
+            bash ${{ secrets.REMOTE_DIR }}/stop.sh
+            nohup bash ${{ secrets.REMOTE_DIR }}/run.sh > ${{ secrets.REMOTE_DIR }}/nohup.log 2>&1 &
