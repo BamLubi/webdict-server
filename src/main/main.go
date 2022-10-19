@@ -22,5 +22,5 @@ func main() {
 	}
 
 	// 启动服务器
-	web.RunHttp()
+	web.RunServer()
 }

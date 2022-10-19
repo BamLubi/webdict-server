@@ -6,7 +6,7 @@ import (
 	"webdict-server/pkg/controller"
 )
 
-func RunHttp() {
+func RunServer() {
 	r := gin.Default()
 	// BUG: 增加tls支持, 支持http重定向, 目前有问题
 	//r.Use(TlsHandler())
@@ -14,15 +14,21 @@ func RunHttp() {
 	r.Use(HttpInterceptor())
 	//解决跨域
 	r.Use(config.CorsConfig())
+
 	//路由组
-	appInfoGroup := r.Group("/")
+	appInfoGroup := r.Group("/literature")
 	{
-		appInfoGroup.POST("/literature/insert", controller.NewLiteratureController().Insert)
-		appInfoGroup.POST("/literature/update", controller.NewLiteratureController().Update)
-		appInfoGroup.GET("/literature/getAll", controller.NewLiteratureController().FindAll)
-		appInfoGroup.GET("/literature/search/:key", controller.NewLiteratureController().FuzzyFind)
-		appInfoGroup.GET("/literature/get/:id", controller.NewLiteratureController().FindById)
+		appInfoGroup.POST("/insert", controller.NewLiteratureController().Insert)
+		appInfoGroup.POST("/update", controller.NewLiteratureController().Update)
+		appInfoGroup.GET("/getAll", controller.NewLiteratureController().FindAll)
+		appInfoGroup.GET("/search/:key", controller.NewLiteratureController().FuzzyFind)
+		appInfoGroup.GET("/get/:id", controller.NewLiteratureController().FindById)
 	}
-	r.RunTLS(":8000", "/ssl/go.rtclab.top/ssl.pem", "/ssl/go.rtclab.top/ssl.key")
-	//r.Run(config.HOST + ":" + config.PORT)
+
+	// 如果是生成模式,则使用HTTPS,否则使用HTTP
+	if config.MODE == "PRODUCTION" {
+		r.RunTLS(config.ServerUrl, config.ServerSSLCert, config.ServerSSLKey)
+	} else {
+		r.Run(config.ServerUrl)
+	}
 }
