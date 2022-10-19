@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY}}
           pass: ${{ secrets.FTP_PASSWORD}}
           first_ssh: |
-            kill -9 `ps -ef | grep webdict_server | grep -v "grep" | awk '{print $2}'`
+            bash ${{ secrets.REMOTE_DIR }}/stop.sh
           scp: |
             "./output/" => ${{ secrets.REMOTE_DIR }}
           last_ssh: |
