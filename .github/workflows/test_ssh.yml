@@ -1,4 +1,4 @@
-name: Test
+name: Test SSH
 
 on:
   workflow_dispatch:
@@ -11,11 +11,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: ls -a via ssh
-        uses: garygrossgarten/github-action-ssh@release
+      - name: ssh-scp-ssh-pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
         with:
-          command: ls -a
           host: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          port: ${{ secrets.FTP_PORT }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          user: ${{ secrets.FTP_USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY}}
+          pass: ${{ secrets.FTP_PASSWORD}}
+          first_ssh: ls -l
