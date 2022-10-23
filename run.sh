@@ -14,7 +14,7 @@ echo "Finding exist Process done"
 echo "Running..."
 
 # 编译
-# go build ./src/main/main.go
+# go build -o webdict_server ./src/main/main.go
 
 # 赋权限
 chmod 777 webdict_server
