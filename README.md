@@ -11,13 +11,13 @@ Webdict-Server is a background service, builted vy Go, and used to support WebDi
 
 ## Quick Start
 
-1. Setup Docker Environment
+1. Setup Docker Environment. If you are not familiar with Docker, Please read [Docker Installation](#Docker_Installation).
 
 ```sh
 docker-compose -f docker-compose.yml up -d
 ```
 
-2. Run Project
+1. Run Project.
 
 ```sh
 nohup bash ./run.sh > nohup.log 2>&1 &
@@ -36,4 +36,40 @@ go build ./src/main/main.go
 # - "-DEV": Development Mode, will load the config "dev.properties".
 # - "-PROD_TEST": Production Mode, will load the config "app.properties", 
 #   but will not run the server, just used for test.
+```
+
+<a id="Docker_Installation"></a>## Docker Installation
+
+1. Delete all old version about docker.
+
+```sh
+apt-get remove docker docker-engine docker.io
+```
+
+2. Install require packages.
+
+```sh
+apt-get install apt-transport-https ca-certificates curl software-properties-common
+```
+
+3. Configure the download settings.
+
+```sh
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+
+add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+```
+
+4. Install docker and docker-compose.
+
+```sh
+apt-get update
+apt-get install docker-ce docker-compose
+```
+
+5. Run Docker.
+
+```sh
+systemctl enable docker
+systemctl start docker
 ```
