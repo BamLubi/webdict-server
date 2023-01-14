@@ -24,3 +24,6 @@ go.work
 bin
 logs
 output
+
+# Special file
+gen_allowed_host.py
