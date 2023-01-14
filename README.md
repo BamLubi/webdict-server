@@ -1,6 +1,8 @@
 # webdict-server
 
-Webdict-Server is a background service, builted vy Go, and used to support WebDict.
+![](https://img.shields.io/badge/-Go-brightgreen) ![](https://img.shields.io/badge/-Docker-blue) ![](https://img.shields.io/badge/-CI/CD-red)
+
+Webdict-Server is a background service, builted by Go, and used to support WebDict. It has completed the CI/CD, which will automatic build and deploy the project when code changed.
 
 ## Environment
 
@@ -36,6 +38,12 @@ go build ./src/main/main.go
 # - "-DEV": Development Mode, will load the config "dev.properties".
 # - "-PROD_TEST": Production Mode, will load the config "app.properties", 
 #   but will not run the server, just used for test.
+```
+
+4. (optional) Import allowed hosts to the redis server.
+
+```shell
+python gen_allowed_host.py
 ```
 
 <a id="Docker_Installation"></a>
@@ -74,3 +82,10 @@ apt-get install docker-ce docker-compose
 systemctl enable docker
 systemctl start docker
 ```
+
+## CI/CD
+supproted by `GitHub Actions`
+
+When you push code to the branch "main", it will trigger the Action "Build & Deploy", which will build the project and deploy it to the remote server(you need to config your own secrets).
+
+Please check the file `.github\workflows` for more details.
